@@ -59,8 +59,5 @@ namespace dl
         {
             _animation->update();
         }
-        else {
-            play(AnimationType::IDLE, AnimationDirection::NONE);
-        }
     }
 }

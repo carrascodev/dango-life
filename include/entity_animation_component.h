@@ -15,6 +15,7 @@ namespace dl {
             void play(AnimationType animation, AnimationDirection direction, bool once = false);
             void add_animation(AnimationData* animation);
             inline AnimationType get_currentAnimation() {return _currentAnimation;}
+            inline bool is_playing() {return _animation.has_value() && !_animation->done();}
             void update();
         protected:
             Entity* _entity;

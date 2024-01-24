@@ -70,6 +70,7 @@ namespace dl
 
     void Entity::attack()
     {
+
         _animationComponent->play(AnimationType::ATTACK, AnimationDirection::NONE, true);
     }
 
@@ -86,6 +87,12 @@ namespace dl
 
     void Entity::update()
     {
-        _animationComponent->update();
+        if(_animationComponent->is_playing())
+        {
+            _animationComponent->update();
+        }
+        else {
+            _animationComponent->play(AnimationType::IDLE, AnimationDirection::NONE);
+        }
     }
 } // dl
