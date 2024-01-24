@@ -1,0 +1,7 @@
+/build/
+/graphics_raw/
+.idea/
+.DS_Store
+dango-life.elf
+dango-life.gba
+dango-life.sav
