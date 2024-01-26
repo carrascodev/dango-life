@@ -19,7 +19,7 @@ namespace dl {
             void update();
         protected:
             Entity* _entity;
-            bn::optional<bn::sprite_animate_action<8>> _animation;
+            bn::optional<bn::sprite_animate_action<12>> _animation;
             AnimationType _currentAnimation;
             AnimationDirection _currentDirection;
             bn::array<AnimationData*, 7> _animations;

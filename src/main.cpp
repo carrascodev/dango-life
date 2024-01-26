@@ -10,9 +10,9 @@
 
 #include "bn_regular_bg_items_bg_level0.h"
 #include "bn_sprite_items_char_base.h"
+#include "ui_frame.h"
 
-int main()
-{
+int main() {
     bn::core::init();
 
     bn::regular_bg_ptr background = bn::regular_bg_items::bg_level0.create_bg(0, 0);
@@ -24,13 +24,14 @@ int main()
     background.set_camera(camera);
     playerSprite.set_camera(camera);
 
-    dl::Player* player = new dl::Player(camera, playerSprite);
-    dl::InputHandler* inputHandler = new dl::InputHandler(player);
+    dl::Player *player = new dl::Player(camera, playerSprite);
+    dl::InputHandler *inputHandler = new dl::InputHandler(player);
+    dl::UIFrame *uiFrame = new dl::UIFrame(camera);
 
-    while(true)
-    {
+    while (true) {
         inputHandler->handleInput();
         player->update();
+        uiFrame->update();
         bn::core::update();
     }
 }

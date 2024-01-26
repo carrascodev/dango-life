@@ -10,3 +10,8 @@ Player::Player(bn::camera_ptr &camera, bn::sprite_ptr &sprite) : Entity(camera, 
 dl::Player::~Player()
 {
 }
+
+void Player::update()
+{
+    Entity::update();
+}
