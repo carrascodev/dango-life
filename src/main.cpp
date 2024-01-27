@@ -11,6 +11,7 @@
 #include "bn_regular_bg_items_bg_level0.h"
 #include "bn_sprite_items_char_base.h"
 #include "ui_frame.h"
+#include "gen_sow_area_data.h"
 
 int main() {
     bn::core::init();
