@@ -6,11 +6,12 @@
 #include "bn_optional.h"
 #include "bn_vector.h"
 #include "entity_direction.h"
+#include "entity.h"
 
 namespace dl {
     class ActorAnimationComponent;
 
-    class Actor {
+    class Actor : public IEntity {
         public:
             Actor(bn::camera_ptr& camera, bn::sprite_ptr& sprite);
             virtual ~Actor();
@@ -19,8 +20,8 @@ namespace dl {
             virtual void move(bn::fixed_point delta);
             virtual void interact();
             
-            void set_position(bn::fixed_point position);
-            inline bn::fixed_point get_position() { return _sprite.position() + _camera.position(); };
+            void set_position(bn::fixed_point position) override;
+            inline bn::fixed_point get_position() override { return _sprite.position() + _camera.position(); };
 
             bn::sprite_ptr get_sprite();
 
