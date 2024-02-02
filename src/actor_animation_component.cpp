@@ -1,20 +1,20 @@
-#include "entity_animation_component.h"
-#include "entity.h"
+#include "actor_animation_component.h"
+#include "actor.h"
 #include "bn_sprite_items_char_base.h"
 #include "entity_direction.h"
 
 namespace dl
 {
-    EntityAnimationComponent::EntityAnimationComponent(Entity *entity, bn::array<AnimationData *, 7> animations) : _entity(entity), _animations(animations)
+    ActorAnimationComponent::ActorAnimationComponent(Actor *entity, bn::array<AnimationData *, 7> animations) : _entity(entity), _animations(animations)
     {
         entity->set_direction(EntityDirection::FRONT);
     }
 
-    EntityAnimationComponent::~EntityAnimationComponent()
+    ActorAnimationComponent::~ActorAnimationComponent()
     {
     }
 
-    void EntityAnimationComponent::play(AnimationType type, EntityDirection direction, bool once)
+    void ActorAnimationComponent::play(AnimationType type, EntityDirection direction, bool once)
     {
         if (_animation.has_value() && _currentAnimation == type && (_entity->get_direction() == direction))
         {
@@ -49,12 +49,12 @@ namespace dl
         }
     }
 
-    void EntityAnimationComponent::add_animation(AnimationData *animation)
+    void ActorAnimationComponent::add_animation(AnimationData *animation)
     {
         _animations[static_cast<int>(animation->type)] = animation;
     }
 
-    void EntityAnimationComponent::update()
+    void ActorAnimationComponent::update()
     {
         if(_animation.has_value() && !_animation->done())
         {

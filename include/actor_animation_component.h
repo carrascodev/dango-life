@@ -3,11 +3,11 @@
 #include "animation_data.h"
 
 namespace dl {
-    class Entity;
-    class EntityAnimationComponent {
+    class Actor;
+    class ActorAnimationComponent {
         public:
-            EntityAnimationComponent(Entity* entity, bn::array<AnimationData*, 7> animations);
-            ~EntityAnimationComponent();
+            ActorAnimationComponent(Actor* entity, bn::array<AnimationData*, 7> animations);
+            ~ActorAnimationComponent();
             /// @brief 
             /// @param animation 
             /// @param direction 
@@ -18,7 +18,7 @@ namespace dl {
             inline bool is_playing() {return _animation.has_value() && !_animation->done();}
             void update();
         protected:
-            Entity* _entity;
+            Actor* _entity;
             bn::optional<bn::sprite_animate_action<12>> _animation;
             AnimationType _currentAnimation;
             bn::array<AnimationData*, 7> _animations;

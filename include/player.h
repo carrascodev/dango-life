@@ -1,11 +1,11 @@
 #include "bn_core.h"
 #include "bn_fixed_point.h"
 #include "bn_camera_ptr.h"
-#include "entity.h"
+#include "actor.h"
 #include "player_field_area_interaction_component.h"
 
 namespace dl {
-    class Player : public Entity {
+    class Player : public Actor {
         public:
             Player(bn::camera_ptr& camera, bn::sprite_ptr& sprite);
             ~Player() override;

@@ -8,12 +8,12 @@
 #include "entity_direction.h"
 
 namespace dl {
-    class EntityAnimationComponent;
+    class ActorAnimationComponent;
 
-    class Entity {
+    class Actor {
         public:
-            Entity(bn::camera_ptr& camera, bn::sprite_ptr& sprite);
-            virtual ~Entity();
+            Actor(bn::camera_ptr& camera, bn::sprite_ptr& sprite);
+            virtual ~Actor();
             virtual void update();
 
             virtual void move(bn::fixed_point delta);
@@ -32,7 +32,7 @@ namespace dl {
             bn::sprite_ptr _sprite;
             bn::camera_ptr _camera;
             bool _isMoving;
-            EntityAnimationComponent* _animationComponent;
+            ActorAnimationComponent* _animationComponent;
             EntityDirection _currentDirection;
     };
 }

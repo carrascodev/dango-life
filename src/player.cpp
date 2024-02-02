@@ -4,7 +4,7 @@
 
 using namespace dl;
 
-Player::Player(bn::camera_ptr &camera, bn::sprite_ptr &sprite) : Entity(camera, sprite)
+Player::Player(bn::camera_ptr &camera, bn::sprite_ptr &sprite) : Actor(camera, sprite)
 {
     _position = bn::fixed_point(0, 0);
     _fieldAreaInteractionComponent = new PlayerFieldAreaInteractionComponent(camera,this);
@@ -16,15 +16,15 @@ dl::Player::~Player()
 
 void Player::update()
 {
-    Entity::update();
+    Actor::update();
     _fieldAreaInteractionComponent->update();
 }
 
 void Player::move(bn::fixed_point position) {
-    Entity::move(position);
+    Actor::move(position);
 }
 
 void Player::interact() {
-    Entity::interact();
+    Actor::interact();
     _fieldAreaInteractionComponent->do_sow();
 }

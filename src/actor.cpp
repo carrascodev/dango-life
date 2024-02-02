@@ -1,14 +1,14 @@
-#include "entity.h"
+#include "actor.h"
 #include "bn_camera_ptr.h"
 #include "bn_fixed_point.h"
 #include "bn_sprite_animate_actions.h"
 #include "bn_sprite_items_char_base.h"
 #include "bn_log.h"
-#include "entity_animation_component.h"
+#include "actor_animation_component.h"
 
 namespace dl
 {
-    Entity::Entity(bn::camera_ptr &camera, bn::sprite_ptr &sprite) : _sprite(sprite), _camera(camera)
+    Actor::Actor(bn::camera_ptr &camera, bn::sprite_ptr &sprite) : _sprite(sprite), _camera(camera)
     {
         // default animation datas
         AnimationData *idleAnimation = new AnimationData();
@@ -32,14 +32,14 @@ namespace dl
         attackAnimation->frames[EntityDirection::BACK] = bn::array<int, 4>{15, 16, 17, 15};
         attackAnimation->frames[EntityDirection::RIGHT] = bn::array<int, 4>{18, 19, 20, 18};
 
-        _animationComponent = new EntityAnimationComponent(this, bn::array<AnimationData *, 7>{idleAnimation, walkAnimation, attackAnimation, nullptr, nullptr, nullptr, nullptr});
+        _animationComponent = new ActorAnimationComponent(this, bn::array<AnimationData *, 7>{idleAnimation, walkAnimation, attackAnimation, nullptr, nullptr, nullptr, nullptr});
     }
 
-    Entity::~Entity()
+    Actor::~Actor()
     {
     }
 
-    void Entity::move(bn::fixed_point delta)
+    void Actor::move(bn::fixed_point delta)
     {
         auto x = delta.x().to_double();
         auto y = delta.y().to_double();
@@ -68,24 +68,24 @@ namespace dl
         _sprite.set_position(_position);
     }
 
-    void Entity::interact()
+    void Actor::interact()
     {
 
         _animationComponent->play(AnimationType::ATTACK, EntityDirection::NONE, true);
     }
 
-    void Entity::set_position(bn::fixed_point position)
+    void Actor::set_position(bn::fixed_point position)
     {
         _position = position;
         _sprite.set_position(_position);
     }
 
-    bn::sprite_ptr Entity::get_sprite()
+    bn::sprite_ptr Actor::get_sprite()
     {
         return _sprite;
     }
 
-    void Entity::update()
+    void Actor::update()
     {
         if(_animationComponent->is_playing())
         {
