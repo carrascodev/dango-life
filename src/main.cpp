@@ -12,6 +12,7 @@
 #include "bn_sprite_items_char_base.h"
 #include "ui_frame.h"
 #include "gen_sow_area_data.h"
+#include "field_area.h"
 
 int main() {
     bn::core::init();
@@ -25,14 +26,16 @@ int main() {
     background.set_camera(camera);
     playerSprite.set_camera(camera);
 
+    dl::FieldArea *fieldArea = dl::FieldArea::create(camera);
     dl::Player *player = new dl::Player(camera, playerSprite);
     dl::InputHandler *inputHandler = new dl::InputHandler(player);
     dl::UIFrame *uiFrame = new dl::UIFrame(camera);
 
     while (true) {
         inputHandler->handleInput();
-        player->update();
         uiFrame->update();
+        fieldArea->update();
+        player->update();
         bn::core::update();
     }
 }

@@ -14,23 +14,23 @@ namespace dl
         AnimationData *idleAnimation = new AnimationData();
         idleAnimation->type = AnimationType::IDLE;
         idleAnimation->speed = 8;
-        idleAnimation->frames[AnimationDirection::BACK] = bn::array<int, 4>{4, 4, 4, 4};
-        idleAnimation->frames[AnimationDirection::FRONT] = bn::array<int, 4>{0, 0, 0, 0};
-        idleAnimation->frames[AnimationDirection::RIGHT] = bn::array<int, 4>{8, 8, 8, 8};
+        idleAnimation->frames[EntityDirection::BACK] = bn::array<int, 4>{4, 4, 4, 4};
+        idleAnimation->frames[EntityDirection::FRONT] = bn::array<int, 4>{0, 0, 0, 0};
+        idleAnimation->frames[EntityDirection::RIGHT] = bn::array<int, 4>{8, 8, 8, 8};
 
         AnimationData *walkAnimation = new AnimationData();
         walkAnimation->type = AnimationType::WALK;
         walkAnimation->speed = 8;
-        walkAnimation->frames[AnimationDirection::BACK] = bn::array<int, 4>{5, 6, 7, 5};
-        walkAnimation->frames[AnimationDirection::FRONT] = bn::array<int, 4>{1, 2, 3, 1};
-        walkAnimation->frames[AnimationDirection::RIGHT] = bn::array<int, 4>{9, 10, 11, 9};
+        walkAnimation->frames[EntityDirection::BACK] = bn::array<int, 4>{5, 6, 7, 5};
+        walkAnimation->frames[EntityDirection::FRONT] = bn::array<int, 4>{1, 2, 3, 1};
+        walkAnimation->frames[EntityDirection::RIGHT] = bn::array<int, 4>{9, 10, 11, 9};
 
         AnimationData *attackAnimation = new AnimationData();
         attackAnimation->type = AnimationType::ATTACK;
         attackAnimation->speed = 8;
-        attackAnimation->frames[AnimationDirection::FRONT] = bn::array<int, 4>{12, 13, 14, 12};
-        attackAnimation->frames[AnimationDirection::BACK] = bn::array<int, 4>{15, 16, 17, 15};
-        attackAnimation->frames[AnimationDirection::RIGHT] = bn::array<int, 4>{18, 19, 20, 18};
+        attackAnimation->frames[EntityDirection::FRONT] = bn::array<int, 4>{12, 13, 14, 12};
+        attackAnimation->frames[EntityDirection::BACK] = bn::array<int, 4>{15, 16, 17, 15};
+        attackAnimation->frames[EntityDirection::RIGHT] = bn::array<int, 4>{18, 19, 20, 18};
 
         _animationComponent = new EntityAnimationComponent(this, bn::array<AnimationData *, 7>{idleAnimation, walkAnimation, attackAnimation, nullptr, nullptr, nullptr, nullptr});
     }
@@ -51,27 +51,27 @@ namespace dl
         
         if (x == 0 && y == 0)
         {
-            _animationComponent->play(AnimationType::IDLE, AnimationDirection::NONE);
+            _animationComponent->play(AnimationType::IDLE, EntityDirection::NONE);
             return;
         }
 
         if (y == 0 && x != 0)
         {
-            _animationComponent->play(AnimationType::WALK, x > 0 ? AnimationDirection::RIGHT : AnimationDirection::LEFT);
+            _animationComponent->play(AnimationType::WALK, x > 0 ? EntityDirection::RIGHT : EntityDirection::LEFT);
         }
         else
         {
-            _animationComponent->play(AnimationType::WALK, y > 0 ? AnimationDirection::FRONT : AnimationDirection::BACK);
+            _animationComponent->play(AnimationType::WALK, y > 0 ? EntityDirection::FRONT : EntityDirection::BACK);
         }
 
         _position += delta;
         _sprite.set_position(_position);
     }
 
-    void Entity::attack()
+    void Entity::interact()
     {
 
-        _animationComponent->play(AnimationType::ATTACK, AnimationDirection::NONE, true);
+        _animationComponent->play(AnimationType::ATTACK, EntityDirection::NONE, true);
     }
 
     void Entity::set_position(bn::fixed_point position)
@@ -92,7 +92,7 @@ namespace dl
             _animationComponent->update();
         }
         else {
-            _animationComponent->play(AnimationType::IDLE, AnimationDirection::NONE);
+            _animationComponent->play(AnimationType::IDLE, EntityDirection::NONE);
         }
     }
 } // dl

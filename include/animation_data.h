@@ -1,15 +1,8 @@
 #include "bn_unordered_map.h"
 #include "bn_array.h"
+#include "entity_direction.h"
 
 namespace dl {
-    enum AnimationDirection {
-        NONE,
-        FRONT,
-        BACK,
-        RIGHT,
-        LEFT
-    };
-
     enum AnimationType {
         IDLE,
         WALK,
@@ -22,7 +15,7 @@ namespace dl {
 
     struct AnimationData {
         AnimationType type;
-        bn::unordered_map<AnimationDirection,bn::array<int, 4>,4> frames;
+        bn::unordered_map<EntityDirection,bn::array<int, 4>,4> frames;
         int speed;
     };
 }

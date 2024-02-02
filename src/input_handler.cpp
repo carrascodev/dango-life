@@ -31,7 +31,7 @@ void dl::InputHandler::handleInput() {
     }
     if(bn::keypad::a_pressed()) 
     {
-        _player->attack();
+        _player->interact();
         return;
     }
 
