@@ -1,7 +1,8 @@
 /build/
 /graphics_raw/
-.idea/
+.vscode/
 .DS_Store
 dango-life.elf
 dango-life.gba
 dango-life.sav
+compile_commands.json

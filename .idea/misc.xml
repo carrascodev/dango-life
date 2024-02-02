@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Black">
+    <option name="sdkName" value="Python 3.11" />
+  </component>
+  <component name="CidrRootsConfiguration">
+    <sourceRoots>
+      <file path="$PROJECT_DIR$" />
+    </sourceRoots>
+    <libraryRoots>
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/agbabi/src" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/cult-of-gba-bios/src" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/gba-modern/src" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/gbt-player/src" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/libtonc/asm" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/libtonc/src" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/libugba/src" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/maxmod/source" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/maxmod/source_gba" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/posprintf/src" />
+      <file path="$PROJECT_DIR$/../../butano/hw/3rd_party/vgm-player/src" />
+      <file path="$PROJECT_DIR$/../../butano/hw/src" />
+      <file path="$PROJECT_DIR$/../../butano/src" />
+    </libraryRoots>
+  </component>
+  <component name="CompDBSettings">
+    <option name="linkedExternalProjectsSettings">
+      <CompDBProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+      </CompDBProjectSettings>
+    </option>
+  </component>
+  <component name="CompDBWorkspace" PROJECT_DIR="$PROJECT_DIR$" />
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+</project>
