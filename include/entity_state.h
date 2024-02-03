@@ -1,14 +1,16 @@
+#pragma once
 #include "player.h"
 
 namespace dl {
-    class ActorState {
+    template<typename T>
+    class EntityState {
         public:
-            ActorState(Actor* entity);
-            virtual ~ActorState();
+            EntityState(T& entity);
+            virtual ~EntityState();
             virtual void begin_state();
             virtual void update();
             virtual void exit_state();
         protected:
-            Actor* _entity;
+            T& _entity;
     };
 }
