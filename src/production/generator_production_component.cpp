@@ -7,27 +7,31 @@
 
 namespace dl {
 
-    GeneratorProductionComponent::GeneratorProductionComponent(ProductionEntity &entity, unsigned int durationTicks,
-                                                               int cycles, int speed) : _entity(entity),
-                                                                                        _durationTicks(durationTicks),
-                                                                                        _speed(speed),
-                                                                                        _cycles(cycles) {
+    GeneratorProductionComponent::GeneratorProductionComponent(ProductionEntity* entity, unsigned long durationTicks,int cycles, int speed) :
+            _entity(entity),
+            _durationTicks(durationTicks),
+            _speed(speed),
+            _timer(bn::nullopt),
+            _cycles(cycles) {
 
     }
 
     void GeneratorProductionComponent::start() {
-        _timer = bn::timer();
-        _entity.set_state(ProductionState::GENERATING);
+        _timer = bn::make_optional<bn::timer>();
+        _entity->set_state(ProductionState::GENERATING);
     }
 
     void GeneratorProductionComponent::stop() {
         _timer = bn::nullopt;
-        _entity.set_state(ProductionState::IDLE);
+        if(_entity->get_state() == ProductionState::GENERATING)
+            _entity->on_complete();
+        _entity->set_state(ProductionState::IDLE);
     }
 
     void GeneratorProductionComponent::update() {
-        if (_timer.has_value() && _timer->elapsed_ticks() > _durationTicks) {
-            _timer = bn::nullopt;
+        int elapsed = _timer->elapsed_ticks();
+        if (_timer.has_value() && elapsed > _durationTicks) {
+            _timer->restart();
             _cycles--;
             if (_cycles == 0) {
                 stop();

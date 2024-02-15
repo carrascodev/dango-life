@@ -28,7 +28,7 @@ namespace dl {
 
     void PlayerFieldAreaInteractionComponent::show_cursor() {
         FieldArea *area = FieldArea::instance();
-        bn::unordered_map<bn::fixed_point, bn::sprite_ptr, 32> &soil_layer = area->get_soil_layer();
+        //bn::unordered_map<bn::fixed_point, bn::sprite_ptr, 32> &soil_layer = area->get_soil_layer();
         //bn::unordered_map<bn::fixed_point, bn::optional<bn::sprite_ptr>, 32> &plant_layer = area->get_plant_layer();
 
         bn::fixed_point playerPos = bn::fixed_point(_player->get_position().x(),
@@ -39,7 +39,7 @@ namespace dl {
         cursorPos.set_x(((cursorPos.x().integer()|15)+1)-8);
         cursorPos.set_y(((cursorPos.y().integer()|15)+1)-8);
 
-        if(soil_layer.contains(cursorPos)) {
+        if(area->get_tile_index(cursorPos) > -1) {
             _cursor.set_visible(true);
             _cursor.set_position(cursorPos);
         }
@@ -50,9 +50,8 @@ namespace dl {
 
     void PlayerFieldAreaInteractionComponent::do_sow() {
         FieldArea *area = FieldArea::instance();
-        bn::unordered_map<bn::fixed_point, bn::sprite_ptr, 32> &soil_layer = area->get_soil_layer();
-        if (soil_layer.contains(_cursor.position())) {
-            FieldArea *area = FieldArea::instance();
+        auto index = area->get_tile_index(_cursor.position());
+        if (index > -1) {
             area->sow(_cursor.position());
         }
     }

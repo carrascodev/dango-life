@@ -16,8 +16,6 @@ namespace dl {
 
     class ProductionEntity : public IEntity {
     public:
-        ProductionEntity() = default;
-
         virtual void produce(int amount) = 0;
 
         virtual void collect() = 0;
@@ -27,8 +25,10 @@ namespace dl {
         inline void set_state(ProductionState state) { _state = state; }
         inline ProductionState get_state() { return _state; }
 
+        virtual void on_complete() = 0;
+
     protected:
-        GeneratorProductionComponent _generator;
+        bn::optional<GeneratorProductionComponent> _generator;
         ProductionState _state;
     };
 } // dl

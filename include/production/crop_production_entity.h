@@ -6,20 +6,26 @@
 #include "production_entity.h"
 #include "bn_camera_ptr.h"
 #include "bn_sprite_ptr.h"
+#include "bn_optional.h"
 
 namespace dl {
 	class CropEntity : public ProductionEntity {
 	public:
-        CropEntity(bn::camera_ptr& camera);
+        explicit CropEntity(bn::camera_ptr& camera, bn::fixed_point position);
 
         void sow();
 		void collect() override;
 		void produce(int amount) override;
+        bn::fixed_point get_position() override { return _position; }
+        void set_position(bn::fixed_point position) override { _position = position; }
+        void update() override;
+        void on_complete() override;
 
     private:
         bn::camera_ptr _camera;
-        bn::sprite_ptr _soilSprite;
-        bn::sprite_ptr _cropSprite;
+        bn::fixed_point _position;
+        bn::optional<bn::sprite_ptr> _soilSprite;
+        bn::optional<bn::sprite_ptr> _cropSprite;
 	};
 
 } // dl

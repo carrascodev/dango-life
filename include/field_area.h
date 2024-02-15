@@ -6,6 +6,8 @@
 #include <bn_vector.h>
 #include <bn_optional.h>
 #include <bn_unordered_map.h>
+#include <bn_array.h>
+#include "crop_production_entity.h"
 
 namespace dl {
 
@@ -32,21 +34,16 @@ namespace dl {
         void create_area();
         void update();
 
-        bn::unordered_map<bn::fixed_point,bn::sprite_ptr, 32>& get_soil_layer() {
-            return _soilLayer;
-        }
 
-        bn::unordered_map<bn::fixed_point,bn::optional<bn::sprite_ptr>, 32>& get_plant_layer() {
-            return _plantLayer;
-        }
 
         void plant(int index);
         void sow(bn::fixed_point position);
 
+        int get_tile_index(const bn::fixed_point &point);
+
     private:
         explicit FieldArea(bn::camera_ptr &camera);
-        bn::unordered_map<bn::fixed_point, bn::sprite_ptr, 32> _soilLayer;
-        bn::unordered_map<bn::fixed_point,bn::optional<bn::sprite_ptr>, 32> _plantLayer;
+        bn::array<CropEntity*,24> _crops;
         bn::camera_ptr &_camera;
         inline static FieldArea* _instance = nullptr;
     };
