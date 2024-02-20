@@ -58,4 +58,16 @@ namespace dl {
                 _soilSprite->set_visible(false);
             }
     }
+
+    void CropEntity::water() {
+        if(_soilSprite.has_value())
+        {
+            auto sprite = bn::sprite_items::spr_sowing_tiles.create_sprite(0, 0, 1);
+            sprite.set_position(get_position());
+            sprite.set_z_order(1);
+            sprite.set_camera(_camera);
+            sprite.set_visible(true);
+            _soilSprite = sprite;
+        }
+    }
 } // namespace dl

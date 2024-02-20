@@ -54,4 +54,11 @@ namespace dl {
             _crops[index]->sow();
         }
     }
+
+    void FieldArea::water(const bn::fixed_point &point) {
+        int index = get_tile_index(point);
+        if (index > -1) {
+            _crops[index]->water();
+        }
+    }
 } // dl

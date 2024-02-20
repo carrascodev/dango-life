@@ -29,7 +29,7 @@ int main() {
     dl::FieldArea *fieldArea = dl::FieldArea::create(camera);
     dl::Player *player = new dl::Player(camera, playerSprite);
     dl::InputHandler *inputHandler = new dl::InputHandler(player);
-    dl::UIFrame *uiFrame = new dl::UIFrame(camera);
+    dl::UIFrame *uiFrame = new dl::UIFrame(player,camera);
 
     while (true) {
         inputHandler->handleInput();

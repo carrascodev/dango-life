@@ -11,11 +11,14 @@ dl::UIPanel::UIPanel(bn::camera_ptr& camera, bn::sprite_ptr& sprite, bn::fixed_p
         _visible(visible),
         z_order(zOrder)
         {
-            addListeners();
+            if(_visible) {
+                show();
+            } else {
+                hide();
+            }
         }
 
 dl::UIPanel::~UIPanel() {
-    removeListeners();
 }
 
 void dl::UIPanel::show() {
@@ -30,10 +33,6 @@ void dl::UIPanel::hide() {
     _visible = false;
     _sprite.set_visible(false);
 }
-
-void dl::UIPanel::addListeners() {}
-
-void dl::UIPanel::removeListeners() {}
 
 void dl::UIPanel::set_position(bn::fixed_point position) {
     _position = position;

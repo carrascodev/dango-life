@@ -8,10 +8,13 @@ Player::Player(bn::camera_ptr &camera, bn::sprite_ptr &sprite) : Actor(camera, s
 {
     _position = bn::fixed_point(0, 0);
     _fieldAreaInteractionComponent = new PlayerFieldAreaInteractionComponent(camera,this);
+    _actorHandComponent = new ActorHandComponent();
 }
 
 dl::Player::~Player()
 {
+    delete _fieldAreaInteractionComponent;
+    delete _actorHandComponent;
 }
 
 void Player::update()
@@ -26,5 +29,16 @@ void Player::move(bn::fixed_point position) {
 
 void Player::interact() {
     Actor::interact();
-    _fieldAreaInteractionComponent->do_sow();
+    switch (_actorHandComponent->get_tool())
+    {
+        case WorkTool::HOE:
+            _fieldAreaInteractionComponent->do_sow();
+            break;
+        case WorkTool::WATERING_CAN:
+            _fieldAreaInteractionComponent->do_water();
+            break;
+        case WorkTool::SEEDS:
+            _fieldAreaInteractionComponent->do_plant();
+            break;
+    }
 }

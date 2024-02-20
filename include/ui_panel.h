@@ -1,3 +1,5 @@
+#pragma once
+
 #include <bn_fixed_point.h>
 #include <bn_rect_window.h>
 #include <bn_sprite_ptr.h>
@@ -11,8 +13,8 @@ namespace dl {
         virtual ~UIPanel();
         virtual void show();
         virtual void hide();
-        virtual void addListeners();
-        virtual void removeListeners();
+        virtual void addListeners() = 0;
+        virtual void removeListeners() = 0;
         void set_position(bn::fixed_point position);
         bool is_visible();
     protected:

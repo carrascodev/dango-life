@@ -56,6 +56,22 @@ namespace dl {
         }
     }
 
+    void PlayerFieldAreaInteractionComponent::do_water() {
+        FieldArea *area = FieldArea::instance();
+        auto index = area->get_tile_index(_cursor.position());
+        if (index > -1) {
+            area->water(_cursor.position());
+        }
+    }
+
+    void PlayerFieldAreaInteractionComponent::do_plant() {
+        FieldArea *area = FieldArea::instance();
+        auto index = area->get_tile_index(_cursor.position());
+        if (index > -1) {
+            area->plant(index);
+        }
+    }
+
 
 }
 

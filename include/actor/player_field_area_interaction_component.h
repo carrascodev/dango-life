@@ -19,6 +19,11 @@ namespace dl {
 
         void update();
         void do_sow();
+
+        void do_water();
+
+        void do_plant();
+
     private:
         Player* _player;
         bn::camera_ptr _camera;

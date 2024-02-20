@@ -35,5 +35,11 @@ void dl::InputHandler::handleInput() {
         return;
     }
 
+    if(bn::keypad::b_pressed())
+    {
+        _player->get_hand_component()->switch_tool();
+        return;
+    }
+
     _player->move(bn::fixed_point(x, y));
 }

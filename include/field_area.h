@@ -41,6 +41,8 @@ namespace dl {
 
         int get_tile_index(const bn::fixed_point &point);
 
+        void water(const bn::fixed_point &point);
+
     private:
         explicit FieldArea(bn::camera_ptr &camera);
         bn::array<CropEntity*,24> _crops;

@@ -17,6 +17,9 @@ namespace dl {
         void show() override;
         void hide() override;
 
+        inline void addListeners() override {};
+        inline void removeListeners() override {};
+
         private:
         unsigned int _money;
         bn::vector<bn::sprite_ptr, 9> _text_sprites;

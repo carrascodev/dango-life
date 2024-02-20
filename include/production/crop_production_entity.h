@@ -16,6 +16,7 @@ namespace dl {
         void sow();
 		void collect() override;
 		void produce(int amount) override;
+        void water();
         bn::fixed_point get_position() override { return _position; }
         void set_position(bn::fixed_point position) override { _position = position; }
         void update() override;
