@@ -9,6 +9,7 @@
 
 namespace dl {
     enum class ProductionState {
+        NONE,
         IDLE,
         GENERATING,
         COLLECTING
@@ -26,6 +27,7 @@ namespace dl {
         inline ProductionState get_state() { return _state; }
 
         virtual void on_complete() = 0;
+        virtual void on_cycle_complete() = 0;
 
     protected:
         bn::optional<GeneratorProductionComponent> _generator;

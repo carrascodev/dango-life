@@ -32,10 +32,9 @@ namespace dl {
     }
 
     void FieldArea::plant(int index) {
-        if (_crops[index]->get_state() == ProductionState::IDLE) {
-            if(_crops[index] != nullptr)
-                _crops[index]->produce(1);
-        }
+        if(_crops[index] != nullptr)
+            _crops[index]->produce(1);
+
     }
 
     int FieldArea::get_tile_index(const bn::fixed_point &point) {

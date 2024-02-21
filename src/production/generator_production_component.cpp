@@ -33,6 +33,7 @@ namespace dl {
         if (_timer.has_value() && elapsed > _durationTicks) {
             _timer->restart();
             _cycles--;
+            _entity->on_cycle_complete();
             if (_cycles == 0) {
                 stop();
             }

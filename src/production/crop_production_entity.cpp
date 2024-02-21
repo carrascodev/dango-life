@@ -5,6 +5,7 @@
 #include "bn_sprite_items_spr_sowing_tiles.h"
 #include "bn_optional.h"
 #include "bn_sprite_items_spr_crop_corn.h"
+#include "bn_math.h"
 
 namespace dl {
 
@@ -17,15 +18,30 @@ namespace dl {
     }
 
     void CropEntity::collect() {
+        if(_cropSprite.has_value() && _state == ProductionState::IDLE && _cropIndex == 5)
+        {
+            _cropSprite->set_visible(false);
+            _cropSprite = bn::nullopt;
+            //TODO: Add to inventory.
+        }
     }
 
     void CropEntity::produce(int amount) {
-        if(_cropSprite.has_value())
-        {
-            _cropSprite->set_visible(true);
-        } else {
+        if(_cropSprite.has_value() && _state != ProductionState::IDLE)
+           return;
+        else {
+
+            if(_soilSprite.has_value() && _state == ProductionState::GENERATING)
+            {
+                _generator =  bn::make_optional<GeneratorProductionComponent>(this, 10 * (1 * (1e5)), 6);
+                _generator->start();
+            }
+            else {
+                return;
+            }
+
             auto sprite = bn::sprite_items::spr_crop_corn.create_sprite(0, 0, 0);
-            sprite.set_position(get_position());
+            sprite.set_position(get_position().x(), get_position().y() - 8);
             sprite.set_z_order(1);
             sprite.set_camera(_camera);
             sprite.set_visible(true);
@@ -55,8 +71,13 @@ namespace dl {
     void CropEntity::on_complete() {
             if(!_cropSprite.has_value())
             {
-                _soilSprite->set_visible(false);
+                _soilSprite = bn::nullopt;
             }
+            else
+            {
+                _state = ProductionState::IDLE;
+            }
+
     }
 
     void CropEntity::water() {
@@ -69,5 +90,14 @@ namespace dl {
             sprite.set_visible(true);
             _soilSprite = sprite;
         }
+    }
+
+    void CropEntity::on_cycle_complete() {
+        if(_cropIndex < 5)
+            _cropIndex++;
+        auto sprite = bn::sprite_items::spr_crop_corn.create_sprite(0, 0, _cropIndex);
+        sprite.set_position(get_position().x(), get_position().y() - 8);
+
+        _cropSprite = sprite;
     }
 } // namespace dl

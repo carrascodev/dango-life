@@ -7,6 +7,7 @@
 #include "bn_camera_ptr.h"
 #include "bn_sprite_ptr.h"
 #include "bn_optional.h"
+#include "observer.h"
 
 namespace dl {
 	class CropEntity : public ProductionEntity {
@@ -21,12 +22,14 @@ namespace dl {
         void set_position(bn::fixed_point position) override { _position = position; }
         void update() override;
         void on_complete() override;
+        void on_cycle_complete() override;
 
     private:
         bn::camera_ptr _camera;
         bn::fixed_point _position;
         bn::optional<bn::sprite_ptr> _soilSprite;
         bn::optional<bn::sprite_ptr> _cropSprite;
-	};
+        int _cropIndex;
+    };
 
 } // dl
