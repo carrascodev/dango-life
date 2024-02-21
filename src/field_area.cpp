@@ -3,7 +3,7 @@
 #include "bn_camera_ptr.h"
 #include "player.h"
 #include "bn_unordered_map.h"
-#include "crop_production_entity.h"
+#include "crop_entity.h"
 
 #include "bn_sprite_items_spr_sowing_tiles.h"
 #include "bn_sprite_items_spr_crop_corn.h"

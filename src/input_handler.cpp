@@ -35,9 +35,15 @@ void dl::InputHandler::handleInput() {
         return;
     }
 
-    if(bn::keypad::b_pressed())
+    if(bn::keypad::l_pressed())
     {
-        _player->get_hand_component()->switch_tool();
+        _player->get_hand_component()->switch_tool(true);
+        return;
+    }
+
+    if(bn::keypad::r_pressed())
+    {
+        _player->get_hand_component()->switch_tool(false);
         return;
     }
 

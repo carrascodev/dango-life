@@ -1,7 +1,7 @@
 //
 // Created by Henrique Pagnossi on 2024-02-02.
 //
-#include "crop_production_entity.h"
+#include "crop_entity.h"
 #include "bn_sprite_items_spr_sowing_tiles.h"
 #include "bn_optional.h"
 #include "bn_sprite_items_spr_crop_corn.h"
@@ -27,18 +27,13 @@ namespace dl {
     }
 
     void CropEntity::produce(int amount) {
+        if(!_soilSprite.has_value())
+            return;
+
         if(_cropSprite.has_value() && _state != ProductionState::IDLE)
            return;
         else {
-
-            if(_soilSprite.has_value() && _state == ProductionState::GENERATING)
-            {
-                _generator =  bn::make_optional<GeneratorProductionComponent>(this, 10 * (1 * (1e5)), 6);
-                _generator->start();
-            }
-            else {
-                return;
-            }
+            _generator =  bn::make_optional<GeneratorProductionComponent>(this, 10 * (1 * (1e5)), 6);
 
             auto sprite = bn::sprite_items::spr_crop_corn.create_sprite(0, 0, 0);
             sprite.set_position(get_position().x(), get_position().y() - 8);
@@ -46,6 +41,10 @@ namespace dl {
             sprite.set_camera(_camera);
             sprite.set_visible(true);
             _cropSprite = sprite;
+
+            if(_soilIndex == 1) {
+                _generator->start();
+            }
         }
     }
 
@@ -55,7 +54,7 @@ namespace dl {
         } else {
             auto sprite = bn::sprite_items::spr_sowing_tiles.create_sprite(0, 0, 0);
             sprite.set_position(get_position());
-            sprite.set_z_order(1);
+            sprite.set_z_order(2);
             sprite.set_camera(_camera);
             sprite.set_visible(true);
             _soilSprite = sprite;
@@ -69,9 +68,10 @@ namespace dl {
     }
 
     void CropEntity::on_complete() {
-            if(!_cropSprite.has_value())
+            if(_cropSprite.has_value() == false)
             {
                 _soilSprite = bn::nullopt;
+                _soilIndex = 0;
             }
             else
             {
@@ -83,16 +83,28 @@ namespace dl {
     void CropEntity::water() {
         if(_soilSprite.has_value())
         {
+            _soilIndex = 1;
             auto sprite = bn::sprite_items::spr_sowing_tiles.create_sprite(0, 0, 1);
             sprite.set_position(get_position());
-            sprite.set_z_order(1);
+            sprite.set_z_order(2);
             sprite.set_camera(_camera);
             sprite.set_visible(true);
             _soilSprite = sprite;
         }
+
+        if(_cropSprite.has_value() && _generator != bn::nullopt) {
+            _generator->start();
+        }
+        else {
+            _generator =  bn::make_optional<GeneratorProductionComponent>(this, 30 * (3 * (1e5)), 1);
+            _generator->start();
+        }
     }
 
     void CropEntity::on_cycle_complete() {
+        if(!_cropSprite.has_value())
+            return;
+
         if(_cropIndex < 5)
             _cropIndex++;
         auto sprite = bn::sprite_items::spr_crop_corn.create_sprite(0, 0, _cropIndex);

@@ -10,15 +10,16 @@ namespace dl {
 
     enum class WorkTool {
         HOE,
-        WATERING_CAN,
-        SEEDS
+        SEEDS,
+        WATERING_CAN
     };
+
     class ActorHandComponent : public ISubject<WorkTool> {
     public:
         ActorHandComponent();
         ~ActorHandComponent();
 
-        void switch_tool();
+        void switch_tool(bool left = false);
 
         void attach(IObserver<dl::WorkTool>* observer) override;
         void detach(IObserver<dl::WorkTool>* observer) override;

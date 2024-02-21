@@ -29,14 +29,22 @@ namespace dl {
     }
 
     void GeneratorProductionComponent::update() {
-        int elapsed = _timer->elapsed_ticks();
-        if (_timer.has_value() && elapsed > _durationTicks) {
-            _timer->restart();
-            _cycles--;
-            _entity->on_cycle_complete();
-            if (_cycles == 0) {
-                stop();
+        if (_timer.has_value()) {
+            int elapsed = _timer->elapsed_ticks();
+            if(elapsed > _durationTicks)
+            {
+                _timer->restart();
+                _cycles--;
+                _entity->on_cycle_complete();
+                if (_cycles == 0) {
+                    stop();
+                }
             }
         }
+    }
+
+    void GeneratorProductionComponent::pause() {
+        _timer = bn::nullopt;
+        _entity->set_state(ProductionState::IDLE);
     }
 } // dl

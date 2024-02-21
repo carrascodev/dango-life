@@ -20,6 +20,8 @@ namespace dl {
 
         void stop();
 
+        void pause();
+
         void update();
 
         inline int get_cycles() { return _cycles; }

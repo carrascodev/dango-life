@@ -30,6 +30,7 @@ namespace dl {
         bn::optional<bn::sprite_ptr> _soilSprite;
         bn::optional<bn::sprite_ptr> _cropSprite;
         int _cropIndex;
+        int _soilIndex;
     };
 
 } // dl

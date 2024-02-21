@@ -7,7 +7,7 @@
 #include <bn_optional.h>
 #include <bn_unordered_map.h>
 #include <bn_array.h>
-#include "crop_production_entity.h"
+#include "crop_entity.h"
 
 namespace dl {
 
