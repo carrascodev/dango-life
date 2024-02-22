@@ -28,9 +28,6 @@ namespace dl {
 
     void PlayerFieldAreaInteractionComponent::show_cursor() {
         FieldArea *area = FieldArea::instance();
-        //bn::unordered_map<bn::fixed_point, bn::sprite_ptr, 32> &soil_layer = area->get_soil_layer();
-        //bn::unordered_map<bn::fixed_point, bn::optional<bn::sprite_ptr>, 32> &plant_layer = area->get_plant_layer();
-
         bn::fixed_point playerPos = bn::fixed_point(_player->get_position().x(),
                                                     _player->get_position().y()+24);
 

@@ -22,7 +22,9 @@ namespace dl {
         {
             _cropSprite->set_visible(false);
             _cropSprite = bn::nullopt;
-            //TODO: Add to inventory.
+
+            _generator = bn::make_optional<GeneratorProductionComponent>(this, 30 * (3 * (1e5)), 1);
+            _generator->start();
 
             return true;
         }
@@ -74,8 +76,23 @@ namespace dl {
     void CropEntity::on_complete() {
             if(_cropSprite.has_value() == false)
             {
-                _soilSprite = bn::nullopt;
-                _soilIndex = 0;
+                if(_soilIndex == 0)
+                {
+                    _soilSprite = bn::nullopt;
+                    _soilIndex = 0;
+                }
+                else
+                {
+                    auto sprite = bn::sprite_items::spr_sowing_tiles.create_sprite(0, 0, 0);
+                    sprite.set_position(get_position());
+                    sprite.set_z_order(2);
+                    sprite.set_camera(_camera);
+                    sprite.set_visible(true);
+
+                    _soilSprite = sprite;
+                    _generator = bn::make_optional<GeneratorProductionComponent>(this, 30 * (3 * (1e5)), 1);
+                    _generator->start();
+                }
             }
             else
             {

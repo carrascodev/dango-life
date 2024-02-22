@@ -6,6 +6,7 @@
 #include "bn_sprite_items_spr_ui_tool_hoe.h"
 #include "bn_sprite_items_spr_ui_tool_watering_can.h"
 #include "bn_sprite_items_spr_ui_tool_potato_seed.h"
+#include "bn_sprite_items_spr_ui_tool_hand.h"
 
 
 namespace dl {
@@ -22,11 +23,15 @@ namespace dl {
         if(tool == WorkTool::HOE) {
             _currentTool = bn::sprite_items::spr_ui_tool_hoe.create_sprite(0, 0);
         }
-        if(tool == WorkTool::WATERING_CAN) {
+        else if(tool == WorkTool::WATERING_CAN) {
             _currentTool = bn::sprite_items::spr_ui_tool_watering_can.create_sprite(0, 0);
         }
-        if(tool == WorkTool::SEEDS) {
+        else if(tool == WorkTool::SEEDS) {
             _currentTool = bn::sprite_items::spr_ui_tool_potato_seed.create_sprite(0, 0);
+        }
+        else if(tool == WorkTool::HAND)
+        {
+            _currentTool = bn::sprite_items::spr_ui_tool_hand.create_sprite(0, 0);
         }
         _currentTool->set_position(_position.x(), _position.y());
         _currentTool->set_z_order(z_order);
