@@ -1,5 +1,7 @@
 #include "input_handler.h"
 #include "bn_keypad.h"
+#include "player.h"
+#include "actor_hand_component.h"
 
 using namespace dl;
 

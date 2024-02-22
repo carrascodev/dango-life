@@ -60,4 +60,8 @@ namespace dl {
             _crops[index]->water();
         }
     }
+
+    bool FieldArea::try_collect(int index) {
+        return _crops[index] != nullptr && _crops[index]->try_collect();
+    }
 } // dl

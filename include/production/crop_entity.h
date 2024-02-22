@@ -15,7 +15,7 @@ namespace dl {
         explicit CropEntity(bn::camera_ptr& camera, bn::fixed_point position);
 
         void sow();
-		void collect() override;
+		bool try_collect() override;
 		void produce(int amount) override;
         void water();
         bn::fixed_point get_position() override { return _position; }

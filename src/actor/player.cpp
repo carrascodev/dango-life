@@ -1,6 +1,7 @@
 #include "player.h"
 #include "field_area.h"
 #include "player_field_area_interaction_component.h"
+#include "actor_hand_component.h"
 
 using namespace dl;
 
@@ -40,5 +41,38 @@ void Player::interact() {
         case WorkTool::SEEDS:
             _fieldAreaInteractionComponent->do_plant();
             break;
+        case WorkTool::HAND:
+            _fieldAreaInteractionComponent->do_collect();
+            break;
     }
+}
+
+void Player::attach(IObserver<Player&> *observer) {
+    for (int i = 0; i < _observers.size(); ++i) {
+        if(_observers[i] == nullptr)
+        {
+            _observers[i] = observer;
+            break;
+        }
+    }
+}
+
+void Player::detach(IObserver<Player&> *observer) {
+    for (int i = 0; i < _observers.size(); ++i) {
+        if(_observers[i] == observer) {
+            _observers[i] == nullptr;
+        }
+    }
+
+}
+
+void Player::add_money(int amount) {
+    _money += amount;
+    for (int i = 0; i < _observers.size(); ++i) {
+        if(_observers[i] != nullptr)
+        {
+            _observers[i]->on_notify(*this);
+        }
+    }
+
 }

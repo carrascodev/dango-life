@@ -8,7 +8,6 @@ namespace dl {
     template <class T>
     class IObserver {
     public:
-        virtual ~IObserver() = default;
         virtual void on_notify(T& data) = 0;
     };
 

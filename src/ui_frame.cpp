@@ -24,7 +24,7 @@ namespace dl {
 
     void UIFrame::register_ui_panels() {
         bn::sprite_ptr moneyHudSprite = bn::sprite_items::spr_ui_money_hud.create_sprite(0, 0);
-        _money_hud = new MoneyHud(_camera, moneyHudSprite, bn::fixed_point(92,-70),_text_generator, false, 0);
+        _money_hud = new MoneyHud(_camera,*_player, moneyHudSprite, bn::fixed_point(92,-70),_text_generator, false, 0);
         _money_hud->show();
 
         bn::sprite_ptr toolsHudSprite = bn::sprite_items::spr_ui_tool_menu.create_sprite(0, 0);

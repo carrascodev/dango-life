@@ -17,13 +17,17 @@ namespace dl {
         _state = ProductionState::IDLE;
     }
 
-    void CropEntity::collect() {
+    bool CropEntity::try_collect() {
         if(_cropSprite.has_value() && _state == ProductionState::IDLE && _cropIndex == 5)
         {
             _cropSprite->set_visible(false);
             _cropSprite = bn::nullopt;
             //TODO: Add to inventory.
+
+            return true;
         }
+
+        return false;
     }
 
     void CropEntity::produce(int amount) {

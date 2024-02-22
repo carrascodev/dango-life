@@ -38,6 +38,7 @@ namespace dl {
 
         void plant(int index);
         void sow(bn::fixed_point position);
+        bool try_collect(int index);
 
         int get_tile_index(const bn::fixed_point &point);
 

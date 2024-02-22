@@ -24,6 +24,8 @@ namespace dl {
 
         void do_plant();
 
+        void do_collect();
+
     private:
         Player* _player;
         bn::camera_ptr _camera;

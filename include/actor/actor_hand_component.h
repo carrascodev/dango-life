@@ -5,12 +5,14 @@
 
 #include "bn_array.h"
 #include "observer.h"
+#include "player.h"
 
 namespace dl {
 
     enum class WorkTool {
         HOE,
         SEEDS,
+        HAND,
         WATERING_CAN
     };
 

@@ -19,7 +19,7 @@ namespace dl {
     public:
         virtual void produce(int amount) = 0;
 
-        virtual void collect() = 0;
+        virtual bool try_collect() = 0;
 
         virtual void update();
 

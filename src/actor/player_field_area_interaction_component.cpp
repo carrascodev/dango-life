@@ -72,7 +72,13 @@ namespace dl {
         }
     }
 
-
+    void PlayerFieldAreaInteractionComponent::do_collect() {
+        FieldArea *area = FieldArea::instance();
+        auto index = area->get_tile_index(_cursor.position());
+        if (index > -1 && area->try_collect(index)) {
+            _player->add_money(20);
+        }
+    }
 }
 
 
